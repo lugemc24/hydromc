@@ -4,7 +4,7 @@ import { ENV } from './env';
 
 export const INITIAL_CONFIG: SiteConfig = {
   serverName: "HYDROMC",
-  serverIp: "play.hydromc.com",
+  serverIp: "NO DISPONIBLE",
   discordLink: "https://discord.gg/hydromc",
   discordWebhookUrl: "",
   discordBotToken: ENV.DISCORD_BOT_TOKEN,
