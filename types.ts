@@ -1,5 +1,5 @@
-
-export type Language = 'en' | 'es' | 'tl';
+// Idioma único: Español
+export type Language = 'es';
 
 export enum UserRole {
   OWNER = 'OWNER',
@@ -18,7 +18,7 @@ export interface StaffMember {
 
 export interface Tab {
   id: string;
-  label: Record<Language, string>;
+  label: string;          // Antes: Record<Language, string>
   path: string;
   content: string;
   isVisible: boolean;
@@ -41,13 +41,13 @@ export interface SiteConfig {
   discordBotToken: string;
   discordGuildId: string;
   discordRoleId: string;
-  ownerRoleId: string; // Added owner role support
+  ownerRoleId: string;
   applyLink: string;
-  languages: Language[];
+  languages: Language[];  // ['es']
   staff: StaffMember[];
   tabs: Tab[];
-  heroText: Record<Language, string>;
-  heroSubtext: Record<Language, string>;
+  heroText: string;       // Antes: Record<Language, string>
+  heroSubtext: string;    // Antes: Record<Language, string>
   applications: HelperApplication[];
 }
 
