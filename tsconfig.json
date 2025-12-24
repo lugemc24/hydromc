@@ -1,29 +1,58 @@
 {
   "compilerOptions": {
+    // Versión de JavaScript a la que se compila el proyecto
     "target": "ES2022",
+
+    // Habilita el uso de decoradores experimentales
     "experimentalDecorators": true,
+
+    // Desactiva la definición automática de campos de clase
     "useDefineForClassFields": false,
+
+    // Sistema de módulos utilizado
     "module": "ESNext",
+
+    // Librerías incluidas durante la compilación
     "lib": [
       "ES2022",
       "DOM",
       "DOM.Iterable"
     ],
+
+    // Omite la verificación de tipos en librerías externas
     "skipLibCheck": true,
+
+    // Tipos globales incluidos
     "types": [
       "node"
     ],
+
+    // Resolución de módulos optimizada para bundlers (Vite)
     "moduleResolution": "bundler",
+
+    // Fuerza que cada archivo sea tratado como un módulo independiente
     "isolatedModules": true,
+
+    // Fuerza la detección de módulos
     "moduleDetection": "force",
+
+    // Permite importar archivos JavaScript
     "allowJs": true,
+
+    // Soporte para JSX con el nuevo runtime de React
     "jsx": "react-jsx",
+
+    // Alias de rutas para imports más limpios
     "paths": {
       "@/*": [
         "./*"
       ]
     },
+
+    // Permite importar archivos .ts con extensión explícita
     "allowImportingTsExtensions": true,
+
+    // No genera archivos de salida, solo verifica tipos
     "noEmit": true
   }
-}
+  }
