@@ -1,0 +1,50 @@
+GOLDYNCLOUD AI - ACTUALIZACION GEMINI
+====================================
+
+CONTENIDO
+- index.html, style.css, script.js: los 3 archivos de la web.
+- worker.js: intermediario seguro entre la web y Google Gemini.
+
+IMPORTANTE
+La API Key de Gemini NO se escribe en script.js ni en GitHub. Se guarda como secreto en Cloudflare.
+
+PASO 1 - ACTUALIZAR LA WEB
+1. Descomprime este ZIP.
+2. Sube/reemplaza index.html, style.css y script.js en la raíz de tu repositorio GitHub.
+3. Haz Commit changes y espera a que GitHub Pages publique los cambios.
+
+PASO 2 - CREAR EL WORKER
+1. Entra a https://dash.cloudflare.com/
+2. Ve a Workers & Pages y crea un Worker nuevo.
+3. Abre Edit code y reemplaza el código de ejemplo por el contenido completo de worker.js.
+4. Guarda y pulsa Deploy.
+5. En el Worker abre Settings > Variables and Secrets (o Settings > Variables).
+6. Añade un secreto con nombre GEMINI_API_KEY y como valor pega tu API Key de Google AI Studio.
+7. Guarda los cambios y vuelve a desplegar si Cloudflare lo solicita.
+
+PASO 3 - CONECTAR LA WEB CON EL WORKER
+1. Copia la URL workers.dev que Cloudflare asignó al Worker.
+2. Abre script.js en GitHub.
+3. Busca la línea GEMINI_API_URL.
+4. Reemplaza https://TU-WORKER.workers.dev/api/chat por TU URL real seguida de /api/chat.
+   Ejemplo de formato: https://nombre-del-worker.usuario.workers.dev/api/chat
+5. Guarda el archivo y espera la publicación de GitHub Pages.
+
+OPCIONAL - RESTRINGIR EL ORIGEN
+En Cloudflare Worker > Settings > Variables añade una variable de texto:
+ALLOWED_ORIGIN = https://TU-USUARIO.github.io
+Si usas un dominio personalizado, coloca ese origen exacto, por ejemplo https://goldyncloud.com.
+No agregues una barra final. Si no configuras esta variable, el Worker acepta solicitudes desde cualquier origen.
+
+PRUEBA
+Abre tu web, inicia sesión y pregunta: "Hola, ¿qué puedes hacer?".
+Si aparece un error, revisa Workers > Logs en Cloudflare. La API Key debe estar guardada como Secret GEMINI_API_KEY.
+
+NOTAS IMPORTANTES
+- La web usa Gemini 3.8 Flash por medio de la API oficial de Google.
+- La API puede tener límites de uso y costos según tu cuenta y las condiciones vigentes de Google.
+- Configura una regla de rate limiting en Cloudflare para evitar abuso del endpoint público.
+- El modo rápido/inteligente sigue siendo un selector visual: ambos usan el mismo modelo Gemini en esta integración.
+- Los adjuntos siguen mostrándose en la conversación, pero en esta versión se envían sus nombres, no el contenido de los archivos a Gemini.
+- Las cuentas e historial siguen guardándose en el navegador. No son cuentas seguras ni sincronizadas entre dispositivos.
+- El panel admin y su contraseña en JavaScript son una función local de demostración, no un sistema de administración seguro.

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101010">
+  <meta name="description" content="GoldynCloud AI: asistente para Minecraft, hosting y tecnología.">
+  <title>GoldynCloud AI</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand"><div class="brand-mark">G</div><div><b>GoldynCloud</b><small>AI ASSISTANT</small></div></div>
+      <button class="new-chat" id="newChat"><span>＋</span> Nuevo chat</button>
+      <div class="side-label">ESPACIO DE TRABAJO</div>
+      <button class="side-link active" data-view="chat"><span>✦</span> Asistente</button>
+      <button class="side-link" data-view="history"><span>◷</span> Historial</button>
+      <div class="side-label history-label">CONVERSACIONES</div>
+      <div class="history-list" id="historyList"><p class="muted tiny">Tus chats aparecerán aquí.</p></div>
+      <div class="sidebar-bottom">
+        <a class="discord-link" href="https://discord.gg/EYjGetArVy" target="_blank" rel="noopener">◉ Comunidad de Discord <span>↗</span></a>
+        <button class="profile" id="profileButton"><span class="avatar">G</span><span class="profile-copy"><b id="profileName">Invitado</b><small id="profilePlan">Cuenta gratuita</small></span><span class="dots">•••</span></button>
+      </div>
+    </aside>
+
+    <div class="drawer-backdrop" id="drawerBackdrop"></div>
+    <main class="main">
+      <header class="topbar">
+        <button class="icon-button mobile-menu" id="menuButton" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
+        <div class="top-title"><span class="online-dot"></span> GoldynCloud AI <span class="version">V1</span></div>
+        <div class="top-actions">
+          <button class="outline-button" id="loginTop">Iniciar sesión</button>
+          <button class="primary-button small" id="signupTop">Crear cuenta</button>
+        </div>
+      </header>
+
+      <section class="view active" id="chatView">
+        <div class="chat-scroll" id="chatScroll">
+          <div class="welcome" id="welcome">
+            <div class="welcome-icon"><span>✦</span></div>
+            <div class="eyebrow">TU ASISTENTE INTELIGENTE</div>
+            <h1>¿Qué vamos a crear<br><span>hoy?</span></h1>
+            <p>Estoy aquí para ayudarte con Minecraft, hosting, programación y tecnología.</p>
+            <div class="suggestions">
+              <button class="suggestion" data-prompt="Ayúdame a configurar un servidor de Minecraft en Pterodactyl."><span>▣</span><b>Configurar Minecraft</b><small>Servidores, plugins y rendimiento</small><i>↗</i></button>
+              <button class="suggestion" data-prompt="Explícame cómo configurar un VPS desde cero."><span>⌘</span><b>Administrar un VPS</b><small>Linux, redes y hosting</small><i>↗</i></button>
+              <button class="suggestion" data-prompt="Ayúdame a crear una página web moderna."><span>⌗</span><b>Crear una página web</b><small>HTML, CSS y JavaScript</small><i>↗</i></button>
+              <button class="suggestion" data-prompt="Recomiéndame plugins útiles para un servidor Paper 1.21."><span>◇</span><b>Plugins y recursos</b><small>Ideas para tu comunidad</small><i>↗</i></button>
+            </div>
+          </div>
+          <div class="messages" id="messages"></div>
+        </div>
+        <div class="composer-wrap">
+          <div class="composer" id="composer">
+            <textarea id="promptInput" rows="1" placeholder="Pregúntale algo a GoldynCloud AI..."></textarea>
+            <div class="composer-tools">
+              <div class="tool-left">
+                <label class="tool-button attach-button" for="fileInput">＋ <span>Adjuntar</span></label>
+                <input type="file" id="fileInput" hidden multiple accept=".txt,.md,.json,.js,.html,.css,.py,.log,.yml,.yaml,.xml,.csv,.pdf,.png,.jpg,.jpeg">
+                <button class="tool-button mode-button" id="modeButton">✧ <span>Modo rápido</span>⌄</button>
+              </div>
+              <button class="send-button" id="sendButton" aria-label="Enviar">↑</button>
+            </div>
+            <div class="file-chips" id="fileChips"></div>
+          </div>
+          <p class="disclaimer">GoldynCloud AI puede cometer errores. Verifica la información importante.</p>
+        </div>
+      </section>
+
+      <section class="view secondary-view" id="historyView">
+        <div class="page-heading"><div class="eyebrow">TU ESPACIO</div><h1>Historial de <span>conversaciones</span></h1><p>Retoma tus conversaciones anteriores.</p></div>
+        <div class="history-cards" id="historyCards"></div>
+      </section>
+
+      <footer class="footer">GoldynCloud AI <span>·</span> Creado para construir más.</footer>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="authModal">
+    <div class="modal">
+      <button class="modal-close" data-close="authModal">×</button>
+      <div class="modal-mark">G</div><div class="eyebrow">BIENVENIDO A GOLDYNCLOUD</div>
+      <h2 id="authTitle">Inicia sesión</h2><p class="modal-sub" id="authSubtitle">Accede a tu espacio de trabajo.</p>
+      <form id="authForm">
+        <label id="nameField" class="form-field hidden">Nombre<input id="authName" autocomplete="name" placeholder="Tu nombre"></label>
+        <label class="form-field">Correo electrónico<input id="authEmail" type="email" required autocomplete="email" placeholder="correo@ejemplo.com"></label>
+        <label class="form-field">Contraseña<input id="authPassword" type="password" required minlength="6" autocomplete="current-password" placeholder="Mínimo 6 caracteres"></label>
+        <button class="primary-button full" id="authSubmit">Iniciar sesión</button>
+      </form>
+      <p class="switch-auth"><span id="switchText">¿No tienes cuenta?</span> <button id="switchAuth">Crear cuenta</button></p>
+      <p class="form-note" id="authNote">Las cuentas se guardan en este navegador.</p>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="adminModal">
+    <div class="modal admin-modal">
+      <button class="modal-close" data-close="adminModal">×</button>
+      <div class="eyebrow">CONTROL DE ACCESO</div><h2>Panel de administrador</h2>
+      <p class="modal-sub">Gestiona las cuentas guardadas en este navegador.</p>
+      <form id="adminLoginForm"><label class="form-field">Contraseña de administrador<input id="adminPassword" type="password" required placeholder="Contraseña"></label><button class="primary-button full">Entrar al panel</button></form>
+      <div id="adminPanel" class="hidden"><div class="admin-toolbar"><b>Usuarios</b><button class="outline-button small" id="refreshUsers">Actualizar</button></div><div id="usersList" class="users-list"></div><form id="createUserForm" class="create-user"><b>Crear usuario</b><input id="newUserName" placeholder="Nombre" required><input id="newUserEmail" type="email" placeholder="Correo" required><input id="newUserPassword" type="password" placeholder="Contraseña temporal" required><input id="newUserPlan" type="hidden" value="free"><button class="primary-button full">Crear usuario</button></form></div>
+    </div>
+  </div>
+  <div class="toast" id="toast"></div>
+</body>
+</html>
